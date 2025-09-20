@@ -1,10 +1,11 @@
 Class {
-	#name : #OSSPipeBasedUnixSubprocessTest,
-	#superclass : #OSSUnixSubprocessTest,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSPipeBasedUnixSubprocessTest',
+	#superclass : 'OSSUnixSubprocessTest',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #helper }
+{ #category : 'helper' }
 OSSPipeBasedUnixSubprocessTest >> newCommand [
 	
 	^ self commandClass new
@@ -16,7 +17,7 @@ OSSPipeBasedUnixSubprocessTest >> newCommand [
 	
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSPipeBasedUnixSubprocessTest >> testCommandTryToWriteToStdoutButHasNoReader [
 	| command errString  | 
 	command := self newCommand
@@ -36,7 +37,7 @@ OSSPipeBasedUnixSubprocessTest >> testCommandTryToWriteToStdoutButHasNoReader [
 	command closeAndCleanStreams.
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSPipeBasedUnixSubprocessTest >> testReadingFromStdoutBlocksVM [
 	| command customStream | 
 	customStream := self systemAccessor makeBlockingPipe.
@@ -51,7 +52,7 @@ OSSPipeBasedUnixSubprocessTest >> testReadingFromStdoutBlocksVM [
 	command closeAndCleanStreams.
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSPipeBasedUnixSubprocessTest >> testReadingFromStdoutDoesNotBlocksVM [
 	| command customStream | 
 	customStream := self systemAccessor makeNonBlockingPipe.

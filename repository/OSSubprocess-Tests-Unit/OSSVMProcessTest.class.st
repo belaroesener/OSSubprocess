@@ -1,17 +1,18 @@
 Class {
-	#name : #OSSVMProcessTest,
-	#superclass : #OSSAbstractUnixSubprocessTest,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSVMProcessTest',
+	#superclass : 'OSSAbstractUnixSubprocessTest',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OSSVMProcessTest >> runCaseManaged [
 	"testChangeDirWithNonAsciiCharacters test has to download the unicode table that can take some time.
 	Disable test timeout."
 	^ self runCase
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testChangeDir [
 	| oldDir | 
 	oldDir := self systemAccessor getcwd.
@@ -26,7 +27,7 @@ OSSVMProcessTest >> testChangeDir [
 				
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testChangeDirWithNonAsciiCharacters [
 	| oldDir newDir duringSystemCwd | 
 	oldDir := self systemAccessor getcwd.
@@ -45,7 +46,7 @@ OSSVMProcessTest >> testChangeDirWithNonAsciiCharacters [
 	newDir ensureDelete.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testChangeDirWithNonExistingDir [
 	| oldDir |
 	oldDir := self systemAccessor getcwd.
@@ -58,7 +59,7 @@ OSSVMProcessTest >> testChangeDirWithNonExistingDir [
 	self assert: self systemAccessor getcwd equals: oldDir
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testChildrenCollectionsWithOneProcessBeforeAndAfter [
 	| command | 
 	OSSVMProcess vmProcess initializeAllMyChildren. 
@@ -89,7 +90,7 @@ OSSVMProcessTest >> testChildrenCollectionsWithOneProcessBeforeAndAfter [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testInitializeChildren [
 
 	OSSVMProcess vmProcess initializeAllMyChildren.
@@ -104,7 +105,7 @@ OSSVMProcessTest >> testInitializeChildren [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSVMProcessTest >> testPruneExitedChildrenAfter [
 	| command | 
 	OSSVMProcess vmProcess initializeAllMyChildren. 

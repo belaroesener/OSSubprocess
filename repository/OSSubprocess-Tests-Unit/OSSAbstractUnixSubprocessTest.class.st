@@ -1,21 +1,22 @@
 Class {
-	#name : #OSSAbstractUnixSubprocessTest,
-	#superclass : #TestCase,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSAbstractUnixSubprocessTest',
+	#superclass : 'TestCase',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSAbstractUnixSubprocessTest >> commandClass [
 	^ OSSUnixSubprocess 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OSSAbstractUnixSubprocessTest >> newCommand [
 	
 	^ self commandClass new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OSSAbstractUnixSubprocessTest >> systemAccessor [
 	^ OSSVMProcess vmProcess systemAccessor
 ]

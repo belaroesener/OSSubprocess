@@ -1,22 +1,23 @@
 Class {
-	#name : #OSSPipeTest,
-	#superclass : #OSSAbstractUnixSubprocessTest,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSPipeTest',
+	#superclass : 'OSSAbstractUnixSubprocessTest',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 OSSPipeTest >> blockingPipe [
 	^ self systemAccessor makeBlockingPipe
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OSSPipeTest >> nonBlockingPipe [
 	^ self systemAccessor makeNonBlockingPipe
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OSSPipeTest >> readFromAndClose: aPipe writingTo: aStream [
 
 	| s |
@@ -29,7 +30,7 @@ OSSPipeTest >> readFromAndClose: aPipe writingTo: aStream [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testBasicWriteAndRead [
 	| pipe string readString |
 	string := 'this is a testing string'. 
@@ -39,7 +40,7 @@ OSSPipeTest >> testBasicWriteAndRead [
 	self assert: string equals: readString
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testBlocking [
 
 	| pipe |
@@ -63,7 +64,7 @@ OSSPipeTest >> testBlocking [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testBlockingPeek [
 
 		| pipe |
@@ -84,7 +85,7 @@ OSSPipeTest >> testBlockingPeek [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testIsAtEndOfFile [
 
 	| pipe |
@@ -130,7 +131,7 @@ OSSPipeTest >> testIsAtEndOfFile [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testIsAtEndOfFile2 [
 
 	| pipe string |
@@ -148,7 +149,7 @@ OSSPipeTest >> testIsAtEndOfFile2 [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testNonBlocking [
 
 	| pipe writeStream string |
@@ -161,7 +162,7 @@ OSSPipeTest >> testNonBlocking [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testNonBlockingPeek [
 
 	| pipe |
@@ -181,7 +182,7 @@ OSSPipeTest >> testNonBlockingPeek [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testReadAfterClosedReadEnd [
 	| pipe writeStream readStream string |
 	string := 'this is a testing string'. 
@@ -195,7 +196,7 @@ OSSPipeTest >> testReadAfterClosedReadEnd [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSPipeTest >> testWriteAfterClosedWriteEnd [
 	| pipe writeStream string |
 	string := 'this is a testing string'. 
@@ -205,7 +206,7 @@ OSSPipeTest >> testWriteAfterClosedWriteEnd [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OSSPipeTest >> writeStuffOnThenClose: aPipe [
 
 	^ [(1 to: 10) do:

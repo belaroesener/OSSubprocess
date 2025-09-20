@@ -1,10 +1,11 @@
 Class {
-	#name : #OSSFileBasedUnixSubprocessTest,
-	#superclass : #OSSUnixSubprocessTest,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSFileBasedUnixSubprocessTest',
+	#superclass : 'OSSUnixSubprocessTest',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSFileBasedUnixSubprocessTest >> assertStreamsInfoWithPrevious: beforeArray [
 	| afterArray |
 	afterArray := self getStreamsInfoForRunningTest.
@@ -12,7 +13,7 @@ OSSFileBasedUnixSubprocessTest >> assertStreamsInfoWithPrevious: beforeArray [
 	self assert: beforeArray second equals: afterArray second.
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSFileBasedUnixSubprocessTest >> getStreamsInfoForRunningTest [
 	"We obtain the open tmp files before the open files because in Pharo 7 and ealier getting the entries of /tmp using
 
@@ -25,7 +26,7 @@ OSSFileBasedUnixSubprocessTest >> getStreamsInfoForRunningTest [
 	^ Array with: self numberOfOpenFiles with: openTmpFiles
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSFileBasedUnixSubprocessTest >> newCommand [
 	| command |
 	command := self commandClass new.
@@ -35,7 +36,7 @@ OSSFileBasedUnixSubprocessTest >> newCommand [
 	
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSFileBasedUnixSubprocessTest >> numberOfExistingTempStreamFiles [
 	"This answers the number of files that were created for mapping standard files.
 	Note that in OSSUnixSubprocessTest >> newCommand we define that temp files must be created in /tmp
@@ -46,7 +47,7 @@ OSSFileBasedUnixSubprocessTest >> numberOfExistingTempStreamFiles [
 		(each name beginsWith: 'OSSUnixSubprocess-p')  and: [ each name endsWith: '.deleteme' ]  ]) size	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSFileBasedUnixSubprocessTest >> testBasicCommandWriteToStdin [
 "testBasicCommandWriteToStdin  fails because of what the documentation says:
 	> **Important** We have found some problems when using regular files for the `stdin`. While we do not strictly forbid that, we recommend you do so only if you know very well what you are doing. Otherwise, use blocking pipes for `stdin` (default behavior).
@@ -55,7 +56,7 @@ OSSFileBasedUnixSubprocessTest >> testBasicCommandWriteToStdin [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSFileBasedUnixSubprocessTest >> testReadingFromStdoutAfterCommandFinishesDoesNotBlocksVM [
 	
 	"testReadingFromStdoutAfterCommandFinishesDoesNotBlocksVM fails on Travis on OSX. It looks like if another test would have run while this one was sleeping and hence in #assertStreamsInfoWithPrevious: it fails because there are 2 new not-closed files...which I suspect that those are from another running test..."
@@ -65,7 +66,7 @@ OSSFileBasedUnixSubprocessTest >> testReadingFromStdoutAfterCommandFinishesDoesN
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OSSFileBasedUnixSubprocessTest >> testReadingFromStdoutDoesNotBlocksVM [
 	| command | 
 	"With files, the reading from stdout does not lock the VM"
@@ -80,7 +81,7 @@ OSSFileBasedUnixSubprocessTest >> testReadingFromStdoutDoesNotBlocksVM [
 	command closeAndCleanStreams.
 ]
 
-{ #category : #'tests - signals' }
+{ #category : 'tests - signals' }
 OSSFileBasedUnixSubprocessTest >> testSigTerm [
 	"Same as super impl but special handling for #assertStreamsInfoWithPrevious:. Read comment at the bottom"
 	| process exited streamsInfo |

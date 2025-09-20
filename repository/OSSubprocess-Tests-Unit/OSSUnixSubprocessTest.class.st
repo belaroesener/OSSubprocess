@@ -1,10 +1,11 @@
 Class {
-	#name : #OSSUnixSubprocessTest,
-	#superclass : #OSSAbstractUnixSubprocessTest,
-	#category : 'OSSubprocess-Tests-Unit'
+	#name : 'OSSUnixSubprocessTest',
+	#superclass : 'OSSAbstractUnixSubprocessTest',
+	#category : 'OSSubprocess-Tests-Unit',
+	#package : 'OSSubprocess-Tests-Unit'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OSSUnixSubprocessTest class >> isAbstract [
 	"Override to true if a TestCase subclass is Abstract and should not have
 	TestCase instances built from it"
@@ -13,17 +14,17 @@ OSSUnixSubprocessTest class >> isAbstract [
 			
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> assertStreamsInfoWithPrevious: anObject [ 
 	self assert: self getStreamsInfoForRunningTest equals: anObject
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> getStreamsInfoForRunningTest [
 	^ self numberOfOpenFiles 
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> numberOfOpenFiles [
 	"This is estimation number. Not to be used for real code. It's basically to check the number of opened FIFO files at the beginning of a test and at the end, to validate we are not leaving behind opened files.
 	This should work in most Unix-like and Linux systems.
@@ -42,7 +43,7 @@ OSSUnixSubprocessTest >> numberOfOpenFiles [
 
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> numberOfZombiesProcesses [
 	"This is estimation number. Not to be used for real code. IT's basically 
 	to check the number of zombies at the beginning of a  test and at the end, to validate we are not leaving behind new zombies. 
@@ -60,7 +61,7 @@ OSSUnixSubprocessTest >> numberOfZombiesProcesses [
 	
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> ppidOf: childPid [
 	"Answers the parent pid (ppid) of the childPid
 	"
@@ -78,7 +79,7 @@ OSSUnixSubprocessTest >> ppidOf: childPid [
 	
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testAddAllEnvVariablesFromParent [
 	| command | 
 	command := self newCommand
@@ -92,7 +93,7 @@ OSSUnixSubprocessTest >> testAddAllEnvVariablesFromParent [
 
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testAddAllEnvVariablesFromParentWithoutOverride [
 	| command | 
 	"Here we assume that the parent process will have the $PATH defined."
@@ -108,7 +109,7 @@ OSSUnixSubprocessTest >> testAddAllEnvVariablesFromParentWithoutOverride [
 
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testAddOnlyOneVariable [
 	| command | 
 	command := self newCommand
@@ -121,7 +122,7 @@ OSSUnixSubprocessTest >> testAddOnlyOneVariable [
 
 ]
 
-{ #category : #'tests - basic' }
+{ #category : 'tests - basic' }
 OSSUnixSubprocessTest >> testBasicCommand [
 	| command |
 	command := self newCommand 
@@ -130,7 +131,7 @@ OSSUnixSubprocessTest >> testBasicCommand [
 	
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testBasicCommandReadFromStderr [
 	| streamsInfo |
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -148,7 +149,7 @@ OSSUnixSubprocessTest >> testBasicCommandReadFromStderr [
 	
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testBasicCommandReadFromStdout [
 	| streamsInfo |
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -164,7 +165,7 @@ OSSUnixSubprocessTest >> testBasicCommandReadFromStdout [
 	
 ]
 
-{ #category : #'tests - basic' }
+{ #category : 'tests - basic' }
 OSSUnixSubprocessTest >> testBasicCommandWithArgument [
 	| command | 
 	
@@ -175,7 +176,7 @@ OSSUnixSubprocessTest >> testBasicCommandWithArgument [
 	command runAndWait
 ]
 
-{ #category : #'tests - basic' }
+{ #category : 'tests - basic' }
 OSSUnixSubprocessTest >> testBasicCommandWithNonAsciiArgument [
 	| command | 
 	
@@ -188,7 +189,7 @@ OSSUnixSubprocessTest >> testBasicCommandWithNonAsciiArgument [
 
 ]
 
-{ #category : #'tests - basic' }
+{ #category : 'tests - basic' }
 OSSUnixSubprocessTest >> testBasicCommandWithoutFullPath [
 
 	self newCommand
@@ -202,7 +203,7 @@ OSSUnixSubprocessTest >> testBasicCommandWithoutFullPath [
 
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testBasicCommandWriteToStdin [
 	| command stdOutString string streamsInfo | 
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -227,7 +228,7 @@ OSSUnixSubprocessTest >> testBasicCommandWriteToStdin [
 
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testBasicCommandWriteToStdin2 [
 	| command streamsInfo outString | 
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -254,7 +255,7 @@ OSSUnixSubprocessTest >> testBasicCommandWriteToStdin2 [
 
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testBasicShellCommand [
 	| command | 
 	
@@ -265,7 +266,7 @@ OSSUnixSubprocessTest >> testBasicShellCommand [
 	
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testBasicShellCommandWithNonAsciiCharacters [
 	
 	self withNonAsciiDirectoryDo: [ :dir |
@@ -279,7 +280,7 @@ OSSUnixSubprocessTest >> testBasicShellCommandWithNonAsciiCharacters [
 	]
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testBasicShellCommandWithStdout [
 
 	self newCommand
@@ -292,7 +293,7 @@ OSSUnixSubprocessTest >> testBasicShellCommandWithStdout [
 
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testCheckZombieStateAndTestChildWatcherWorking [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -312,7 +313,7 @@ OSSUnixSubprocessTest >> testCheckZombieStateAndTestChildWatcherWorking [
 	
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testCheckZombieStateWithNonExistingCommang [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -333,7 +334,7 @@ OSSUnixSubprocessTest >> testCheckZombieStateWithNonExistingCommang [
 	
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testCheckZombieStateWithOnExitApi [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -347,7 +348,7 @@ OSSUnixSubprocessTest >> testCheckZombieStateWithOnExitApi [
 	
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testCheckZombieStateWithWaitChild [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -362,7 +363,7 @@ OSSUnixSubprocessTest >> testCheckZombieStateWithWaitChild [
 	
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testCommandReturningDifferentThanZero [
 	| command | 
 	
@@ -377,7 +378,7 @@ OSSUnixSubprocessTest >> testCommandReturningDifferentThanZero [
 	self deny: (command exitStatusInterpreter exitStatus = 0)
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testCreateMissingStandardStreamsDisabled [
 	| command | 
 	
@@ -391,7 +392,7 @@ OSSUnixSubprocessTest >> testCreateMissingStandardStreamsDisabled [
 	
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testCreateMissingStandardStreamsEnabled [
 	| command streamsInfo | 
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -409,7 +410,7 @@ OSSUnixSubprocessTest >> testCreateMissingStandardStreamsEnabled [
 	
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testCustomShellWithStdout [
 
 	self newCommand
@@ -422,7 +423,7 @@ OSSUnixSubprocessTest >> testCustomShellWithStdout [
 
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testCustomStdoutStream [
 	| customStream streamsInfo | 
 	streamsInfo := self getStreamsInfoForRunningTest.
@@ -442,7 +443,7 @@ OSSUnixSubprocessTest >> testCustomStdoutStream [
 
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testGetChildPid [
 	| command | 
 	
@@ -454,7 +455,7 @@ OSSUnixSubprocessTest >> testGetChildPid [
 	command waitForExit. 
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testGetChildStatusAfterFailingCommand [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -472,7 +473,7 @@ OSSUnixSubprocessTest >> testGetChildStatusAfterFailingCommand [
 	self assert: self numberOfZombiesProcesses equals: oldZombies.
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testGetChildStatusAfterFinishesMultipleTimes [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -495,7 +496,7 @@ OSSUnixSubprocessTest >> testGetChildStatusAfterFinishesMultipleTimes [
 	self assert: self numberOfZombiesProcesses equals: oldZombies.
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testGetChildStatusAfterFinishesSuccess [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -513,7 +514,7 @@ OSSUnixSubprocessTest >> testGetChildStatusAfterFinishesSuccess [
 	self assert: self numberOfZombiesProcesses equals: oldZombies.
 ]
 
-{ #category : #'tests - child status' }
+{ #category : 'tests - child status' }
 OSSUnixSubprocessTest >> testGetChildStatusBeforeAndAfterFinishing [
 	| command oldZombies | 
 	oldZombies := self numberOfZombiesProcesses.
@@ -535,7 +536,7 @@ OSSUnixSubprocessTest >> testGetChildStatusBeforeAndAfterFinishing [
 	
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testInheritVarFromEnv [
 	| command | 
 	command := self newCommand
@@ -546,7 +547,7 @@ OSSUnixSubprocessTest >> testInheritVarFromEnv [
 	'/tmp/testReadUserDefinedEnvVar' asFileReference ensureDelete. 
 ]
 
-{ #category : #'tests - basic' }
+{ #category : 'tests - basic' }
 OSSUnixSubprocessTest >> testNoneExistingCommand [
 	| command stdout stderr | 
 	
@@ -568,7 +569,7 @@ OSSUnixSubprocessTest >> testNoneExistingCommand [
 	command closeAndCleanStreams.
 ]
 
-{ #category : #'tests - streams' }
+{ #category : 'tests - streams' }
 OSSUnixSubprocessTest >> testReadingFromStdoutAfterCommandFinishesDoesNotBlocksVM [
 	| command streamsInfo | 
 	
@@ -596,7 +597,7 @@ OSSUnixSubprocessTest >> testReadingFromStdoutAfterCommandFinishesDoesNotBlocksV
 	
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testRunAndWaitPollingEveryRetrievingStreamsOnExitDo [
 	self newCommand 
 		command: '/bin/ls';
@@ -611,7 +612,7 @@ OSSUnixSubprocessTest >> testRunAndWaitPollingEveryRetrievingStreamsOnExitDo [
 
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testSetAndReadCustomVariable [
 	self newCommand 
 		shellCommand: 'echo ${WHATEVER}';
@@ -623,7 +624,7 @@ OSSUnixSubprocessTest >> testSetAndReadCustomVariable [
 
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testSetAndReadCustomVariableOutsideShell [
 	self newCommand 
 		command: 'printenv';
@@ -636,7 +637,7 @@ OSSUnixSubprocessTest >> testSetAndReadCustomVariableOutsideShell [
 
 ]
 
-{ #category : #'tests - env' }
+{ #category : 'tests - env' }
 OSSUnixSubprocessTest >> testSetCustomVariableOutsideShellAndPassedToCommand [
 	" This test demonstrates that we do not expand variables automatically. So if you don't use the shell, or any other special command that
 	will search for special variables (like git searching $GIT_EDITOR), these will not be resolved. 
@@ -654,7 +655,7 @@ OSSUnixSubprocessTest >> testSetCustomVariableOutsideShellAndPassedToCommand [
 
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testShellCommandReturningDifferentThanZero [
 	| command | 
 	
@@ -664,7 +665,7 @@ OSSUnixSubprocessTest >> testShellCommandReturningDifferentThanZero [
 	self assert: command exitStatusInterpreter exitStatus equals: 2. 
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testShellCommandWithPipingStdout [
 
 	self newCommand
@@ -677,7 +678,7 @@ OSSUnixSubprocessTest >> testShellCommandWithPipingStdout [
 
 ]
 
-{ #category : #'tests - shell' }
+{ #category : 'tests - shell' }
 OSSUnixSubprocessTest >> testShellCommandWithStreamRedirects [
 	| stdOutContents | 
 
@@ -696,7 +697,7 @@ OSSUnixSubprocessTest >> testShellCommandWithStreamRedirects [
 	
 ]
 
-{ #category : #'tests - signals' }
+{ #category : 'tests - signals' }
 OSSUnixSubprocessTest >> testSigTerm [
 
 	| process exited streamsInfo |
@@ -738,7 +739,7 @@ OSSUnixSubprocessTest >> testSigTerm [
 
 ]
 
-{ #category : #'tests - signals' }
+{ #category : 'tests - signals' }
 OSSUnixSubprocessTest >> testSigTermInsideLoop [
 
 	| process exited streamsInfo |
@@ -771,7 +772,7 @@ OSSUnixSubprocessTest >> testSigTermInsideLoop [
 
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testStopWaitingWithPolling [
 	| process counter oldZombies |
 	process := self newCommand.
@@ -808,7 +809,7 @@ OSSUnixSubprocessTest >> testStopWaitingWithPolling [
 	
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testStopWaitingWithSigchld [
 	| process counter oldZombies |
 	process := self newCommand.
@@ -843,7 +844,7 @@ OSSUnixSubprocessTest >> testStopWaitingWithSigchld [
 	
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitForExit [
 	| command | 
 	
@@ -857,7 +858,7 @@ OSSUnixSubprocessTest >> testWaitForExit [
 	self assert: command exitStatusInterpreter exitStatus equals: 0. 
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitForExitPolling [
 	| command | 
 	
@@ -871,7 +872,7 @@ OSSUnixSubprocessTest >> testWaitForExitPolling [
 	self assert: command exitStatusInterpreter exitStatus equals: 0. 
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitForExitPollingEvery [
 	| command | 
 	
@@ -885,7 +886,7 @@ OSSUnixSubprocessTest >> testWaitForExitPollingEvery [
 	self assert: command exitStatusInterpreter exitStatus equals: 0. 
 ]
 
-{ #category : #'tests - high API' }
+{ #category : 'tests - high API' }
 OSSUnixSubprocessTest >> testWaitForExitPollingEveryDoing [
 	| streamsInfo totalRead |
 	totalRead := String new writeStream.
@@ -910,7 +911,7 @@ OSSUnixSubprocessTest >> testWaitForExitPollingEveryDoing [
 	
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitForExitWithTimeoutWillFailIfProcessDoesNotFinish [
 	| command | 
 	
@@ -926,7 +927,7 @@ OSSUnixSubprocessTest >> testWaitForExitWithTimeoutWillFailIfProcessDoesNotFinis
 	self assert: command isRunning.
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitForExitWithTimeoutWillNotTimeoutIfProcessFinishes [
 	| command | 
 	
@@ -941,7 +942,7 @@ OSSUnixSubprocessTest >> testWaitForExitWithTimeoutWillNotTimeoutIfProcessFinish
 	self assert: command exitStatusInterpreter exitStatus equals: 0. 
 ]
 
-{ #category : #'tests - wait' }
+{ #category : 'tests - wait' }
 OSSUnixSubprocessTest >> testWaitpidIsNoneBocking [
 	| command childStatus | 
 	
@@ -957,7 +958,7 @@ OSSUnixSubprocessTest >> testWaitpidIsNoneBocking [
 	command waitForExit.
 ]
 
-{ #category : #'tests - pwd' }
+{ #category : 'tests - pwd' }
 OSSUnixSubprocessTest >> testWorkingDirectory [
 	| oldWorkingDirectory | 
 
@@ -979,10 +980,10 @@ OSSUnixSubprocessTest >> testWorkingDirectory [
 
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 OSSUnixSubprocessTest >> withNonAsciiDirectoryDo: aBlock [ 
 	| directory |
-	directory := FileLocator temp / (self class name , '-éoï-' , UUIDGenerator next asString).
+	directory := FileLocator temp / (self class name , '-éoï-' , UUID new asString).
 	directory ensureCreateDirectory.
 	[ aBlock cull: directory asFileReference ]
 	ensure: [ directory ensureDeleteAll ]
