@@ -312,37 +312,29 @@ If you are using files instead of pipes, then it would depend on how long does t
 #### Processing streams while running
 Instead of processing the streams once the process has finished, the other alternative is to process the streams while the process runs.
 
-To demonstrate the facilities we provide for this case, we will see an example in which we invoke the command `tail -f /var/log/system.log`. In this example we use `/var/log/system.log` because it's a file whose contents grows frequently on OSX, but the example could apply to any file. What the example does is to poll with a delay and in every cycle of the loop, read from `stdout` and append that into a `Pharo Playground`:
+To demonstrate the facilities we provide for this case, we will see an example in which we invoke the command `tail -f /var/log/system.log`. In this example we use `/var/log/system.log` because it's a file whose contents grows frequently on OSX, but the example could apply to any file. What the example does is to regularly read from `stdout` and `stderr` and append any news into `Pharo Transcript`:
 
 ```Smalltalk
-| streamsInfo totalStdout page playground |
-totalStdout := String new writeStream.
-"These first lines just open a Pharo Playground with an initial content"
-(page := GTPlayPage new)
-	saveContent: 'initial content'.
-(playground := GTPlayground new)
-	openOn: page.
-[
+process :=
 	OSSUnixSubprocess new
-	command: 'tail';
-	arguments: #('-f' '/var/log/system.log' );
-	redirectStdout;
-	redirectStderr;
-	runAndWaitPollingEvery: (Delay forMilliseconds: 500)
-	doing: [ :process :outStream :errStream |  
-		| read |
-		read := outStream upToEnd.
-		"Next 2 lines is to simply update the Playground"
-		page saveContent: (page content, read).
-		playground update.
-		totalStdout nextPutAll: read.
-		errStream upToEnd.
-	]
-	onExitDo: [ :process :outStream :errStream  |
-		process closeAndCleanStreams.
-		Transcript show: 'Total stdout: ', totalStdout contents.
-	]
-] fork.
+		command: 'tail';
+		arguments: #('-f' '/var/log/system.log' );
+		redirectStdout;
+		redirectStderr;
+		yourself.
+
+[	process
+		runAndWaitPollingEvery: (Delay forMilliseconds: 500)
+		doing: [ :thisProcess :outStream :errStream |  
+			outStream upToEnd ifNotEmpty: [ :string | string traceCr ].
+			errStream upToEnd ifNotEmpty: [ :string | string traceCr ] ]
+		onExitDo: [ :thisProcess :outStream :errStream  |
+			'EXIT' traceCr.
+			thisProcess traceCr.
+			thisProcess closeAndCleanStreams ]
+	] fork
+
+"Terminate demo with: process terminate."
 ```
 
 If you run above code, you will see how a Pharo Playground is opened and every half second the contents are refreshed and appended at the end. The most important method here is `runAndWaitPollingEvery:doing:onExitDo:` which is the facility we provide for these scenarios. However, there are other points to mention:
